@@ -3,6 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Tag Example</title>
+
+    <script type="text/javascript" async=1>
+        ;(function (p, l, o, w, i, n, g) {
+            if (!p[i]) {
+                p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
+                p.GlobalSnowplowNamespace.push(i);
+                p[i] = function () {
+                    (p[i].q = p[i].q || []).push(arguments)
+                };
+                p[i].q = p[i].q || [];
+                n = l.createElement(o);
+                g = l.getElementsByTagName(o)[0];
+                n.async = 1;
+                n.src = w;
+                g.parentNode.insertBefore(n, g)
+            }
+        }(window, document, "script", "https://d22d1xpx4ztuef.cloudfront.net/snowplow-javascript-tracker-3.4.0.js", "snowplow"));
+
+        snowplow('newTracker', 'sp1', 'https://com-snowplowanalytics-dev1.mini.snplow.net', {
+          appId: 'my-app-id',
+          discoverRootDomain: true,
+          cookieSameSite: 'Lax', // Recommended
+          contexts: {
+            webPage: true // default, can be omitted
+          }
+        });
+
+        // must be called before the trackPageView method
+        snowplow('enableActivityTracking', {
+          minimumVisitLength: 5,
+          heartbeatDelay: 10
+        });
+
+
+        // captures URL, referrer and page title (from <title> tag)
+        snowplow('trackPageView');
+        snowplow('enableFormTracking');
+        snowplow('enableLinkClickTracking');
+    </script>
+    
 </head>
 <body>
 <h1>Lorem Ipsum</h1>
@@ -454,44 +494,7 @@
         sodales. Sed in felis in magna porttitor lacinia.</p>
 </div>
 
-<script type="text/javascript" async=1>
-    ;(function (p, l, o, w, i, n, g) {
-        if (!p[i]) {
-            p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
-            p.GlobalSnowplowNamespace.push(i);
-            p[i] = function () {
-                (p[i].q = p[i].q || []).push(arguments)
-            };
-            p[i].q = p[i].q || [];
-            n = l.createElement(o);
-            g = l.getElementsByTagName(o)[0];
-            n.async = 1;
-            n.src = w;
-            g.parentNode.insertBefore(n, g)
-        }
-    }(window, document, "script", "https://d22d1xpx4ztuef.cloudfront.net/snowplow-javascript-tracker-3.4.0.js", "snowplow"));
 
-    snowplow('newTracker', 'sp1', 'https://com-snowplowanalytics-dev1.mini.snplow.net', {
-      appId: 'my-app-id',
-      discoverRootDomain: true,
-      cookieSameSite: 'Lax', // Recommended
-      contexts: {
-        webPage: true // default, can be omitted
-      }
-    });
-
-    // must be called before the trackPageView method
-    snowplow('enableActivityTracking', {
-      minimumVisitLength: 5,
-      heartbeatDelay: 10
-    });
-
-
-    // captures URL, referrer and page title (from <title> tag)
-    snowplow('trackPageView');
-    snowplow('enableFormTracking');
-    snowplow('enableLinkClickTracking');
-</script>
 
 </body>
 </html>

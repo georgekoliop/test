@@ -21,14 +21,17 @@
     })(window, document, "script", "https://cdn.jsdelivr.net/npm/@snowplow/javascript-tracker@4.5.0/dist/sp.min.js", "snowplow");
 
     window.snowplow('newTracker', 'cf', 'https://com-snowplowanalytics-dev1.mini.snplow.net', {
-      appId: 'sandbox-test',
-      platform: 'web',
-      cookieDomain: null,
-      withCredentials: false,
-      contexts: {
-        webPage: true
-      }
-    });
+  appId: 'sandbox-test',
+  platform: 'web',
+  cookieDomain: null,
+  withCredentials: false,
+  anonymousTracking: {
+    withSessionTracking: true
+  },
+  contexts: {
+    webPage: true
+  }
+});
 
     window.snowplow('trackPageView');
   </script>
